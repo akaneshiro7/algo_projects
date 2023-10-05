@@ -2,22 +2,21 @@
 
 #include <string>
 #include <vector>
-#include <unordered_map>
-
+#include <iostream>
 class code {
     public:
-        code(string x);
+        code(vector<int> arr);
         code(int n, int m);
+        void generateRandomCode();
         int checkCorrect(const code& guess) const;
         int checkIncorrect(const code& guess) const;
         int getSize(){return size};
         int getCount() {return guessCount};
         int getNumberByIndex(int i){return secret[i]};
-        unordered_map<int, int> getCounter(){return counter};
+        void printCode();
     private:
         int guessCount;
         int size;
         vector<int> secret;
-        unordered_map<int, int> counter;
         int getRandomNumber(int range);
 };
