@@ -13,7 +13,6 @@ class code {
         int getSize(){return size};
         int getCount() {return guessCount};
         int getNumberByIndex(int i){return secret[i]};
-        void play();
         unordered_map<int, int> getCounter(){return counter};
     private:
         int guessCount;

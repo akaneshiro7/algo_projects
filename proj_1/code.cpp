@@ -80,20 +80,3 @@ int code::getRandomNumber(int range){
     return rand() % range;
 };
 
-void code::play(){
-
-};
-
-int main() {
-    string x, y;
-    int game_over = 0;
-
-    cout << "Welcome to Mastermind! Give the length of the code you want to guess along with the range for each number in the code!" << endl;
-        
-    cout << "Please input the length of the code: ";
-    cin >> x;
-    cout << "Please input the range of each number in the code: ";
-    cin >> y;
-    code secret = code(x, y);
-};
-
