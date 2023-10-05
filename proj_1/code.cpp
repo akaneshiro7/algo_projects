@@ -42,18 +42,24 @@ int code::checkCorrect(code& guess) const {
 
 int code::checkIncorrect(code& guess) const {
     vector<bool> checked(size, false);  // Corrected variable name
+
+
     int incorrect = 0;  // Added missing semicolon
     if(size != guess.getSize()) {
         cout << "Please give a guess of the same length." << endl;
         return -1;  // Added return value
     }
-
+    for (int a=0; a <size; a++){
+        if (secret[a] == guess.getNumberByIndex(a)) {
+            checked[a] = true;
+        }
+    }
     for(int j = 0; j < size; j++) {
         for(int k = 0; k < size; k++) {
-            if (!checked[k] && j != k && secret[j] == guess.getNumberByIndex(k)) {
+            if (checked[k] == false && j != k && secret[j] != guess.getNumberByIndex(j) && secret[k] != guess.getNumberByIndex(k) && secret[j] == guess.getNumberByIndex(k)) {
                 incorrect += 1;
                 checked[k] = true;
-                continue;
+                break;
             }
         }
     }
