@@ -1,30 +1,15 @@
 #include "code.h"
 #include <iostream>
 #include <string>
+#include <vector>  // Added missing include
+#include <cstdlib>  // Added for rand()
+#include <typeinfo>  // Added for typeid()
 using namespace std;
 
 code::code(vector<int> arr) {
     size = arr.size();
-    for(int i = 0; i < arr.size(); i++) {
-        secret.push_back(arr[i]);
-    }
+    secret = arr;  // Simplified copying of vector
 }
-
-code::code(int n, int m){
-    // n = number of digits
-    // m = range of digits from 0 - (m-1)
-
-    try {
-        if (typeid(n).name() == "i" && typeid(m).name() == "i") {
-            size = n;
-            secret = generateRandomCode(n, m)
-        } else {
-            throw 505;
-        }
-    } catch (...) {
-        return "Please give integer inputs for the first and second argument in the constructor";
-    }
-};
 
 void code::generateRandomCode(int n, int m) {
     for (int i = 0; i < n; i++){
@@ -33,50 +18,63 @@ void code::generateRandomCode(int n, int m) {
     }
 }
 
-int code::checkCorrect(const code& guess){
-    // Check how many guesses have the correct number in an correct spot 
+code::code(int n, int m){
+    // n = number of digits
+    // m = range of digits from 0 - (m-1)
+     size = n;
+     generateRandomCode(n, m);  // Added missing semicolon
+}
+
+
+int code::checkCorrect(code& guess) const {
     int correct = 0;
     if (size != guess.getSize()){
         cout << "Invalid Guess" << endl;
-        return;
+        return -1;  // Added return value
     }
-    for(int i = 0;i < size;i++) {
+    for(int i = 0; i < size; i++) {
         if (secret[i] == guess.getNumberByIndex(i)){
             correct += 1;
         }
     }
     return correct;
-};
+}
 
-int code::checkIncorrect(const code& guess){
-    // Check how many guesses have the correct number but in an incorrect spot
-        vector <bool> check(size, false);
-        int incorrect = 0
-        if(size != guess.getSize()) {
-            cout << "Please give a guess of the same length." << endl;
-            return;
-        }
+int code::checkIncorrect(code& guess) const {
+    vector<bool> checked(size, false);  // Corrected variable name
+    int incorrect = 0;  // Added missing semicolon
+    if(size != guess.getSize()) {
+        cout << "Please give a guess of the same length." << endl;
+        return -1;  // Added return value
+    }
 
-        for(int j = 0; j < size; j++) {
-            for(int k = 0; k < size; k++) {
-                if (checked[k] == false && j != k && secret[j] != guess.getNumberByIndex(k) && secret[k] != guess.getNumberByIndex(k) &&  secret[j] == guess.getNumberByIndex(k)) {
-                    incorrect += 1;
-                    checkld[k] = true;
-                }
+    for(int j = 0; j < size; j++) {
+        for(int k = 0; k < size; k++) {
+            if (!checked[k] && j != k && secret[j] == guess.getNumberByIndex(k)) {
+                incorrect += 1;
+                checked[k] = true;
+                continue;
             }
         }
+    }
 
-        return incorrect;
-};
+    return incorrect;
+}
 
 int code::getRandomNumber(int range){
-    // Get a random number within [0, range-1]
     return rand() % range;
-};
+}
 
 void code::printCode(){
     for (int i = 0; i < size; i++) {
         cout << secret[i];
     }
-    return
+    cout << endl;  // Added newline character
 }
+
+int code::getNumberByIndex(int i) {
+    if(i < 0 || i >= secret.size()) {
+        throw std::out_of_range("Index out of bounds");
+    }
+    return secret[i];
+};
