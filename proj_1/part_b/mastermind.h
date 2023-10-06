@@ -3,16 +3,16 @@
 #include "code.h"
 #include "response.h"
 
-class mastermind {
-    public:
-    mastermind();
-    mastermind(int n, int m);
+class Mastermind {
+public:
+    Mastermind();
+    Mastermind(int n, int m);
     void printCode();
-    code humanGuess();
-    response getResponse(const code& c1);
-    bool isSolved(const response& res);
+    Code humanGuess();
+    response getResponse(const Code& c1);
+    bool isSolved(response& res);
     void playGame();
 
-    private:
+private:
     Code generatedCode;
 };
