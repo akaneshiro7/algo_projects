@@ -9,6 +9,7 @@
         "iostream": "cpp",
         "unordered_map": "cpp",
         "xutility": "cpp",
-        "iosfwd": "cpp"
+        "iosfwd": "cpp",
+        "limits": "cpp"
     }
 }
