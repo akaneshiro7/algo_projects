@@ -32,7 +32,7 @@ public:
     bool isSolved(response& res);
 
     // Play the Mastermind game
-    void playGame();
+    void playGame(int n, int m);
 
 private:
     Code game; // The secret code to be guessed
