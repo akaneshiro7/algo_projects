@@ -2,6 +2,7 @@
 
 #include <vector>
 #include <iostream>
+using namespace std;
 
 class response {
     public:
@@ -10,7 +11,7 @@ class response {
     vector<int> getResponse();
 
     // overloading of == and <<
-    friend bool operator==(const repsponse &lhs, const response &rhs);
+    friend bool operator==(const response &lhs, const response &rhs);
     friend ostream& operator<<(ostream& ostr, const response& r);
 
     private:

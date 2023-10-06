@@ -2,6 +2,7 @@
 #include <iostream>
 #include <vector>
 
+using namespace std;
 response::response(int corr, int incorr) {
     setResponse(corr, incorr);
 };
@@ -19,7 +20,7 @@ vector<int> response::getResponse() {
 };
 
 bool operator==(const response& lhs, const response& rhs) {
-    return (lhs.correct == rhs.correct && lhs.);
+    return (lhs.correct == rhs.correct && lhs.incorrect == rhs.incorrect);
 };
 
 ostream& operator<< (ostream& ostr, const response& r) {
