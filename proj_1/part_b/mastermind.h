@@ -14,5 +14,5 @@ class mastermind {
     void playGame();
 
     private:
-    code generatedCode;
+    Code generatedCode;
 };

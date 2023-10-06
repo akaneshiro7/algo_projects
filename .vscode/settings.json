@@ -7,6 +7,8 @@
         "typeinfo": "cpp",
         "list": "cpp",
         "iostream": "cpp",
-        "unordered_map": "cpp"
+        "unordered_map": "cpp",
+        "xutility": "cpp",
+        "iosfwd": "cpp"
     }
 }
