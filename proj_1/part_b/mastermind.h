@@ -14,5 +14,5 @@ public:
     void playGame();
 
 private:
-    Code generatedCode;
+    Code game;
 };
