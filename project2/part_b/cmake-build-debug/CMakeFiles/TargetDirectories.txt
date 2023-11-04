@@ -1,0 +1,3 @@
+C:/Users/lamfa/github projects/algo-2023/algo_projects/project2/part_b/cmake-build-debug/CMakeFiles/part_b.dir
+C:/Users/lamfa/github projects/algo-2023/algo_projects/project2/part_b/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/lamfa/github projects/algo-2023/algo_projects/project2/part_b/cmake-build-debug/CMakeFiles/rebuild_cache.dir

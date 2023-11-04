@@ -1,3 +1,0 @@
-C:/Users/Aidan Kaneshiro/Desktop/algo_projects/project2/cmake-build-debug/CMakeFiles/project2.dir
-C:/Users/Aidan Kaneshiro/Desktop/algo_projects/project2/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/Aidan Kaneshiro/Desktop/algo_projects/project2/cmake-build-debug/CMakeFiles/rebuild_cache.dir

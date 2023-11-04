@@ -1,0 +1,7 @@
+# ninja log v5
+0	283	7207618293751475	CMakeFiles/part_a.dir/main.cpp.obj	2419942f3c3cbc57
+1	139	7207618745829124	build.ninja	a568e500ad2b265b
+10	329	7207618749789138	CMakeFiles/part_a.dir/Node.cpp.obj	dde6444e870aa1e1
+6	349	7207618749979138	CMakeFiles/part_a.dir/Card.cpp.obj	3b5c4a4289fc9c62
+2	575	7207618752239122	CMakeFiles/part_a.dir/Deck.cpp.obj	12456d39924b9327
+575	696	7207618753409137	part_a.exe	d748e2d549ad9a78
