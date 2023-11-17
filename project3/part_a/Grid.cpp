@@ -63,15 +63,18 @@ const int dx[8] = {-1, -1, -1, 0, 1, 1, 1, 0}; // change in x for the 8 directio
 const int dy[8] = {-1, 0, 1, 1, 1, 0, -1, -1}; // change in y for the 8 directions
 
 // Helper function to find words to add to Potential words
-void exploreWord(Dictionary &dict, Grid &grid, int i, int j, int dir, string &currWord, set<string> &potentialWords) {
+void exploreWord(Dictionary &dict, Grid &grid, int i, int j, int dir, string &currWord, set<string> &potentialWords, vector<string> &tempDict, bool isFirstCall = true) {
     if (currWord.length() > 22) return; // 22 is the length of the longest string in dictionary
 
     int rows = grid.getWidth();
     int cols = grid.getHeight();
 
-    // only add words that are length of 5 and in dictionary
-    if (currWord.length() >= 5 && dict.findWord(currWord)) {
-        potentialWords.insert(currWord);
+    // Check if currWord is a potential match in tempDict
+    for (const auto &word: tempDict) {
+        if (currWord == word && currWord.length() >= 5) { // add words that are length of 5 and in dictionary
+            potentialWords.insert(currWord);
+            break; // No need to check further once a match is found
+        }
     }
 
     i = (i + dx[dir] + rows) % rows;
@@ -80,7 +83,26 @@ void exploreWord(Dictionary &dict, Grid &grid, int i, int j, int dir, string &cu
     char nextChar = grid.getLetter(i, j); // getLetter to append to current Word
     currWord.push_back(nextChar); // append nextChar to current Word
 
-    exploreWord(dict, grid, i, j, dir, currWord, potentialWords);
+    // if firstCall, find potential matches from dict, else parse filter through tempDict for potential words
+    if (isFirstCall) {
+        for (const auto &word: dict.getWords()) {
+            if (word.find(currWord) == 0) { // if the dictionary word starts with currWord
+                tempDict.push_back(word);
+            }
+        }
+    } else {
+        vector<string> newTempDict;
+        // updates tempDict with the new potentialWords that can be found
+        for (const auto &word: tempDict) {
+            if (word.find(currWord) == 0) {
+                newTempDict.push_back(word);
+            }
+        }
+        tempDict = newTempDict;
+    }
+
+
+    exploreWord(dict, grid, i, j, dir, currWord, potentialWords, tempDict, false);
     currWord.pop_back();
 }
 
@@ -88,6 +110,7 @@ void exploreWord(Dictionary &dict, Grid &grid, int i, int j, int dir, string &cu
 // Function to find the words hidden in the grid and print the list of matches
 void findMatches(Dictionary &dict, Grid &grid) {
     set<string> potentialWords;
+    vector<string> tempDict;
     int rows = grid.getWidth();
     int cols = grid.getHeight();
 
@@ -95,7 +118,7 @@ void findMatches(Dictionary &dict, Grid &grid) {
         for (int j = 0; j < cols; j++) { // iterates through columns
             for (int dir = 0; dir < 8; dir++) { // iterates and checks in each 8 direcitons
                 string currWord;
-                exploreWord(dict, grid, i, j, dir, currWord, potentialWords);
+                exploreWord(dict, grid, i, j, dir, currWord, potentialWords, tempDict);
             }
         }
     }

@@ -14,6 +14,7 @@ public:
     void readWords(const string& filename);
     void printWords();
     void sortWords();
+    vector<string> getWords();
     bool findWord(const string& s);
 private:
     vector<string> words;

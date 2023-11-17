@@ -51,6 +51,11 @@ void Dictionary::sortWords() {
 
 }
 
+// getter function to get words vector
+vector<string> Dictionary::getWords() {
+    return words;
+}
+
 // function that will find the given search word if it exists
 bool Dictionary::findWord(const string &s) {
     int left = 0; // left pointer
