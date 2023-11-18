@@ -1,0 +1,6 @@
+# ninja log v5
+5	1371	7219668149979243	CMakeFiles/part_b.dir/main.cpp.obj	73f255357eea1cc3
+1371	1636	7219668152668534	part_b.exe	b8d7fdf585310c8c
+25	324	7219678591799365	CMakeFiles/part_b.dir/heap.cpp.obj	5c331d38baa97f1e
+6	1511	7219678603668838	CMakeFiles/part_b.dir/main.cpp.obj	73f255357eea1cc3
+1511	1779	7219678606350889	part_b.exe	35523ab410fa230f
