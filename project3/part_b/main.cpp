@@ -3,20 +3,51 @@
 
 using namespace std;
 
-int main() {
-    Dictionary dict = Dictionary(); // Create dict object of Dictionary
-    Grid grid = Grid(); // Create grid object of Grid
-    grid.readGrid("input30"); // input desired grid file
-    dict.printWords();
-    cout << "----------------------------------------------------------------------------------" << endl;
-//    dict.selectionSort();
-    dict.printWords();
+void search(string gridPath, int sortingOption){
 
-    findMatches(dict, grid); // find all matches in grid
+    Dictionary dict = Dictionary();
+    Grid grid = Grid();
+    try {
+        grid.readGrid(gridPath);
+    } catch(std::invalid_argument& e) {
+        cerr << e.what() << endl;
 
-    // findWord test
-    bool found = dict.findWord("awarded");
-    if (found) cout << "The word was found!" << endl;
-    else cout << "The word was not found" << endl;
+        return;
+    }
+
+    switch (sortingOption) {
+        case 1:
+            cout << "Sorting via Selection Sort" << endl;
+            dict.selectionSort();
+            break;
+        case 2:
+            cout << "Sorting via Quick Sort" << endl;
+            dict.quickSort();
+            break;
+        case 3:
+            cout << "Sorting via Heap Sort" << endl;
+            dict.heapsort();
+            break;
+        default:
+            cout << "Invalid Option Selected" << endl;
+    }
+    findMatches(dict, grid);
 
 }
+
+
+
+int main() {
+    string gridPath;
+    cout << "Please Enter the Path to the Grid: ";
+    cin >> gridPath;
+    int sortingOption;
+    cout << "Please Select a Sorting Option\n" <<
+         "1: Selection Sort\n" <<
+         "2: Quick Sort\n" <<
+         "3: HeapSort Sort\n" <<
+         "Option: ";
+    cin >> sortingOption;
+    search(gridPath, sortingOption);
+}
+

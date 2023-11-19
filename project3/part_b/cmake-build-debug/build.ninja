@@ -51,13 +51,13 @@ build cmake_object_order_depends_target_part_b: phony || CMakeFiles/part_b.dir
 
 build CMakeFiles/part_b.dir/main.cpp.obj: CXX_COMPILER__part_b_Debug C$:/Users/Aidan$ Kaneshiro/Desktop/side_projects/algo_projects/project3/part_b/main.cpp || cmake_object_order_depends_target_part_b
   DEP_FILE = CMakeFiles\part_b.dir\main.cpp.obj.d
-  FLAGS = -g -std=gnu++14
+  FLAGS = -g -std=gnu++17
   OBJECT_DIR = CMakeFiles\part_b.dir
   OBJECT_FILE_DIR = CMakeFiles\part_b.dir
 
 build CMakeFiles/part_b.dir/heap.cpp.obj: CXX_COMPILER__part_b_Debug C$:/Users/Aidan$ Kaneshiro/Desktop/side_projects/algo_projects/project3/part_b/heap.cpp || cmake_object_order_depends_target_part_b
   DEP_FILE = CMakeFiles\part_b.dir\heap.cpp.obj.d
-  FLAGS = -g -std=gnu++14
+  FLAGS = -g -std=gnu++17
   OBJECT_DIR = CMakeFiles\part_b.dir
   OBJECT_FILE_DIR = CMakeFiles\part_b.dir
 

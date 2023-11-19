@@ -1,12 +1,15 @@
 #include "Dictionary.h"
 #include <fstream>
 #include <cmath>
+#include <iostream>
 
 using namespace std;
 
 // default constructor that calls readWords to store strings in vector words
 Dictionary::Dictionary() {
-    readWords("dictionary");
+
+    readWords("../dictionary");
+
 }
 
 // function to read words from dictionary and return vector of words
@@ -36,23 +39,29 @@ void Dictionary::printWords() {
 
 // function to use SelectionSort to sort words in the dictionary
 void Dictionary::selectionSort() {
-    for (int i = 0; i < words.size() - 1; i++) {
-        int minIndx = i;
-        for (int j = i+1; j < words.size(); j++) {
-            if (words[j] < words[minIndx]) {
-                minIndx = j;
+//    if (words.size()) {
+
+        for (int i = 0; i < words.size() - 1; i++) {
+            cout << words.size() << endl;
+            int minIndx = i;
+            for (int j = i+1; j < words.size(); j++) {
+                if (words[j] < words[minIndx]) {
+                    minIndx = j;
+                }
+            }
+
+            // updates first alphabetical word with newfound alphabetically preceding word
+            if (minIndx != i) {
+                string temp = words[i];
+                words[i] = words[minIndx];
+                words[minIndx] = temp;
             }
         }
 
-        // updates first alphabetical word with newfound alphabetically preceding word
-        if (minIndx != i) {
-            string temp = words[i];
-            words[i] = words[minIndx];
-            words[minIndx] = temp;
-        }
+    writeToFile("../selectionSort.txt");
     }
+//}
 
-}
 
 // getter function to get words vector
 vector<string> Dictionary::getWords() {
@@ -85,6 +94,7 @@ bool Dictionary::findWord(const string &s) {
 // Function to sort using QuickSort
 void Dictionary::quickSort() {
     quickSortHelper(0, words.size() - 1);
+    writeToFile("../quickSort.txt");
 }
 
 // Helper Function
@@ -151,4 +161,23 @@ void Dictionary::heapsort() {
     }
 
     words = heap; // Copy back the sorted words
+    writeToFile("../heapSort.txt");
+
+}
+
+void Dictionary::writeToFile(string fileName) {
+    // Open a file in write mode
+    ofstream outFile(fileName);
+    if (!outFile) {
+        cerr << "Error opening file for writing" << endl;
+        return;
+    }
+
+    // Write the contents of the vector to the file
+    for (const auto& line : words) {
+        outFile << line << endl;
+    }
+
+    // Close the file
+    outFile.close();
 }

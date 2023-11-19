@@ -3,7 +3,9 @@
 #include "Dictionary.h"
 #include <iostream>
 #include <set>
+#include <stdexcept>
 
+using namespace std;
 // default constructor to create instance
 Grid::Grid() {
     width = 0;
@@ -14,7 +16,9 @@ Grid::Grid() {
 void Grid::readGrid(const string& filename) {
 
     ifstream file(filename);
-    if (!file.is_open()) return;
+    if (!file.is_open()) {
+        throw invalid_argument("Unable to Open File");
+    };
     vector<char> notAllowed{'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'}; // vector to hold number values to not read
 
     string line;

@@ -26,4 +26,6 @@ private:
     vector<string> words;
     void maxHeapify(vector<string>& heap, int i, int n);
     void buildMaxHeap(vector<string>& heap);
+
+    void writeToFile(string fileName);
 };
