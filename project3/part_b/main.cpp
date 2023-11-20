@@ -1,6 +1,7 @@
 #include "Dictionary.cpp"
 #include "Grid.cpp"
 
+
 using namespace std;
 
 void search(string gridPath, int sortingOption){

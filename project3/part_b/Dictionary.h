@@ -1,11 +1,11 @@
 //
 // Created by Steven Lam on 11/9/2023.
 //
+#pragma once
 
 #include <iostream>
 #include <vector>
 
-#pragma once
 using namespace std;
 
 class Dictionary {

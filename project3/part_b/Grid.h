@@ -2,12 +2,13 @@
 // Created by Steven Lam on 11/9/2023.
 //
 
+#pragma once
+
 #include <iostream>
 #include <vector>
 #include <fstream>
 using namespace std;
 
-#pragma once
 
 class Grid {
 public:

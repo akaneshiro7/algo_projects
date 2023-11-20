@@ -8,7 +8,7 @@ using namespace std;
 // default constructor that calls readWords to store strings in vector words
 Dictionary::Dictionary() {
 
-    readWords("../dictionary");
+    readWords("dictionary");
 
 }
 
@@ -39,9 +39,8 @@ void Dictionary::printWords() {
 
 // function to use SelectionSort to sort words in the dictionary
 void Dictionary::selectionSort() {
-//    if (words.size()) {
 
-        for (int i = 0; i < words.size() - 1; i++) {
+        for (auto i = 0; i < words.size() - 1; i++) {
             cout << words.size() << endl;
             int minIndx = i;
             for (int j = i+1; j < words.size(); j++) {
