@@ -5,7 +5,7 @@ CXX = g++
 CXXFLAGS = -Wall -g
 
 # Define all object files
-OBJS = Dictionary.o Grid.o main.o
+OBJS = main.o
 
 # Name of the executable
 EXEC = runProject

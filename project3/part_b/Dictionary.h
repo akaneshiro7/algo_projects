@@ -5,6 +5,13 @@
 
 #include <iostream>
 #include <vector>
+#include "Dictionary.h"
+#include <fstream>
+#include <cmath>
+#include <iostream>
+#include <unistd.h>
+#include <iostream>
+#include <limits.h>
 
 using namespace std;
 

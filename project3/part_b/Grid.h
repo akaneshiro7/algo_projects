@@ -17,6 +17,7 @@ public:
     char getLetter(int x, int y); // gets letter of given element from grid
     int getWidth(); // gets width of grid
     int getHeight(); // gets height of grid
+    void printGrid();
 private:
     vector<vector<char>> grid;
     int width, height;

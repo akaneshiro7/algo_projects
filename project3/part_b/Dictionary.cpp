@@ -2,14 +2,15 @@
 #include <fstream>
 #include <cmath>
 #include <iostream>
+#include <unistd.h>
+#include <iostream>
+#include <limits.h>
 
 using namespace std;
 
 // default constructor that calls readWords to store strings in vector words
 Dictionary::Dictionary() {
-
     readWords("dictionary");
-
 }
 
 // function to read words from dictionary and return vector of words
@@ -32,7 +33,7 @@ void Dictionary::readWords(const string& filename) {
 // function to print word vector
 void Dictionary::printWords() {
     for(const auto& word : words) {
-        cout << word << " ";
+        cout << word << endl;
     }
     cout << endl;
 }
@@ -57,7 +58,6 @@ void Dictionary::selectionSort() {
             }
         }
 
-    writeToFile("../selectionSort.txt");
     }
 //}
 
@@ -93,7 +93,6 @@ bool Dictionary::findWord(const string &s) {
 // Function to sort using QuickSort
 void Dictionary::quickSort() {
     quickSortHelper(0, words.size() - 1);
-    writeToFile("../quickSort.txt");
 }
 
 // Helper Function
@@ -160,7 +159,6 @@ void Dictionary::heapsort() {
     }
 
     words = heap; // Copy back the sorted words
-    writeToFile("../heapSort.txt");
 
 }
 
