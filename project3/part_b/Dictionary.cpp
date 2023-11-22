@@ -5,7 +5,7 @@
 #include <unistd.h>
 #include <iostream>
 #include <limits.h>
-
+#include "heap.h"
 using namespace std;
 
 // default constructor that calls readWords to store strings in vector words
@@ -40,11 +40,11 @@ void Dictionary::printWords() {
 
 // function to use SelectionSort to sort words in the dictionary
 void Dictionary::selectionSort() {
-
-        for (auto i = 0; i < words.size() - 1; i++) {
-            cout << words.size() << endl;
+    int left = words.size() - 1;
+    int right = words.size();
+        for (auto i = 0; i < left; i++) {
             int minIndx = i;
-            for (int j = i+1; j < words.size(); j++) {
+            for (int j = i+1; j < right; j++) {
                 if (words[j] < words[minIndx]) {
                     minIndx = j;
                 }
@@ -127,39 +127,21 @@ int Dictionary::partition(int low, int high) {
     return (i + 1);
 }
 
-void Dictionary::maxHeapify(vector<string>& heap, int i, int n) {
-    int largest = i;
-    int l = 2 * i + 1;
-    int r = 2 * i + 2;
-
-    if (l < n && heap[l] > heap[largest])
-        largest = l;
-    if (r < n && heap[r] > heap[largest])
-        largest = r;
-
-    if (largest != i) {
-        swap(heap[i], heap[largest]);
-        maxHeapify(heap, largest, n);
-    }
-}
-
-void Dictionary::buildMaxHeap(vector<string>& heap) {
-    int n = heap.size();
-    for (int i = n / 2 - 1; i >= 0; i--)
-        maxHeapify(heap, i, n);
-}
-
 void Dictionary::heapsort() {
-    vector<string> heap = words;
-    buildMaxHeap(heap);
-
-    for (int i = heap.size() - 1; i >= 0; i--) {
-        swap(heap[0], heap[i]);
-        maxHeapify(heap, 0, i);
+    heap<std::string> wordHeap;
+    // Insert words into Heap
+    for (const std::string& word : words) {
+        wordHeap.insert(word);
     }
 
-    words = heap; // Copy back the sorted words
+    // Sort with heapsort
+    wordHeap.heapsort();
 
+    // Clear words and reinsert back into words array
+    words.clear();
+    for (int i = 0; i < wordHeap.getSize(); ++i) {
+        words.push_back(wordHeap.getItem(i));
+    }
 }
 
 void Dictionary::writeToFile(string fileName) {

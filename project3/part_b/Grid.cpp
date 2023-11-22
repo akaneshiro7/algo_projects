@@ -128,8 +128,8 @@ void findMatches(Dictionary &dict, Grid &grid) {
     }
 
     // print out all found matches in grid
-    // cout << "Found words:" << endl;
-    cout << potentialWords.size() << endl;
+    cout << "Found words:" << endl;
+    // cout << potentialWords.size() << endl;
     for (const auto &word: potentialWords) {
         cout << word << endl;
     }

@@ -33,9 +33,12 @@ void Dictionary::printWords() {
 
 // function to use SelectionSort to sort words in the dictionary
 void Dictionary::sortWords() {
-    for (int i = 0; i < words.size() - 1; i++) {
+    int left = words.size() - 1;
+    int right = words.size();
+
+    for (int i = 0; i < left; i++) {
         int minIndx = i;
-        for (int j = i+1; j < words.size(); j++) {
+        for (int j = i+1; j < right; j++) {
             if (words[j] < words[minIndx]) {
                 minIndx = j;
             }

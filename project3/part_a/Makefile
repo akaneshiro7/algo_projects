@@ -8,10 +8,10 @@ CXXFLAGS = -Wall -g
 OBJS = main.o
 
 # Name of the executable
-EXEC = runProject
+EXEC = part_a
 
 # Default target
-all: $(EXEC)
+all: run
 
 # Linking all object files to create the executable
 $(EXEC): $(OBJS)
@@ -29,6 +29,8 @@ Grid.o: Grid.cpp Grid.h
 main.o: main.cpp Dictionary.h Grid.h
 	$(CXX) $(CXXFLAGS) -c main.cpp
 
+run:  $(EXEC)
+	./$(EXEC)
 # Clean target to remove all object files and executable
 clean:
 	rm -f $(OBJS) $(EXEC)

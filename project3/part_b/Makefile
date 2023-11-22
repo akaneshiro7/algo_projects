@@ -5,13 +5,13 @@ CC=g++
 CFLAGS=-I. -Wall
 
 # Object files
-OBJ=main.o heap.o
+OBJ=main.o 
 
 # Executable name
-EXEC=myProgram
+EXEC= part_b 
 
 # Default target
-all: $(EXEC)
+all: run
 
 # Link the program
 $(EXEC): $(OBJ)
@@ -26,5 +26,8 @@ clean:
 	rm -f $(OBJ) $(EXEC)
 
 # Run the program
-run: all
+run: $(EXEC)
 	./$(EXEC)
+
+clean:
+	rm -f $(OBJS) $(EXEC)

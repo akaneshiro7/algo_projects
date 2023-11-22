@@ -8,7 +8,6 @@
 #include "Dictionary.h"
 #include <fstream>
 #include <cmath>
-#include <iostream>
 #include <unistd.h>
 #include <iostream>
 #include <limits.h>
@@ -31,8 +30,6 @@ public:
 
 private:
     vector<string> words;
-    void maxHeapify(vector<string>& heap, int i, int n);
-    void buildMaxHeap(vector<string>& heap);
 
     void writeToFile(string fileName);
 };

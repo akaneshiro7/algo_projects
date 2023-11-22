@@ -1,21 +1,33 @@
-#pragma  once
+#ifndef HEAP_H
+#define HEAP_H
 
 #include <vector>
-#include <stdexcept>
-
-using namespace std;
-
-template <class T>
-class Heap {
+#include "heap.h"
+template <typename T>
+class heap {
 private:
-    std::vector<T> data;
+    std::vector<T> heapArray;
 
-    void maxHeapify(int i, int n);
-    void buildMaxHeap();
+    int parent(int i) const;
+    int left(int i) const;
+    int right(int i) const;
 
 public:
-    Heap();
-    void initializeMaxHeap(const std::vector<T>& input);
-    void heapsort();
+    heap();
+
     T getItem(int n) const;
+
+    void initializeMaxHeap();
+    void maxHeapify(int i);
+    void buildMaxHeap();
+    void heapsort();
+
+    void insert(T item);
+    void printHeap() const;
+
+    int getSize();
 };
+
+#include "heap.cpp" // Include the implementation file
+
+#endif // HEAP_H
