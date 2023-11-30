@@ -3,20 +3,23 @@
 
 
 using namespace std;
-
+// Search Function 
 void search(string gridPath, int sortingOption){
 
     Dictionary dict = Dictionary();
     Grid grid = Grid();
     try {
+        // Read Grid from Grid path
         grid.readGrid(gridPath);
     } catch(std::invalid_argument& e) {
         cerr << e.what() << endl;
 
         return;
     }
+    // Print Unsorted words
     dict.printWords();
 
+    // Sort with Specific Options
     switch (sortingOption) {
         case 1:
             cout << "Sorting via Selection Sort" << endl;
@@ -33,8 +36,9 @@ void search(string gridPath, int sortingOption){
         default:
             cout << "Invalid Option Selected" << endl;
     }
+    // Print Sorted words
     dict.printWords();
-
+    // Find words in dictionary that are in the grid
     findMatches(dict, grid);
 }
 

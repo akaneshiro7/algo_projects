@@ -87,7 +87,7 @@ template <typename T>
 void heap<T>::insert(T item) {
     heapArray.push_back(item);
     int currentIndex = heapArray.size() - 1;
-
+    // Float Up the Heap
     while (currentIndex > 0 && heapArray[currentIndex] > heapArray[parent(currentIndex)]) {
         std::swap(heapArray[currentIndex], heapArray[parent(currentIndex)]);
         currentIndex = parent(currentIndex);

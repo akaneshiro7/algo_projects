@@ -28,6 +28,5 @@ public:
     int getSize();
 };
 
-#include "heap.cpp" // Include the implementation file
-
-#endif // HEAP_H
+#include "heap.cpp" 
+#endif
