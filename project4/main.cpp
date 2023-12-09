@@ -39,6 +39,7 @@ public:
     vector<int> getConflicts(int i, int j);
     void printConflicts();
     void printConflictVector(int i, int j);
+    bool isSolved();
 private:
 // The following matrices go from 1 to BoardSize in each
 // dimension, i.e., they are each (BoardSize+1) * (BoardSize+1)
@@ -47,6 +48,18 @@ private:
 
 };
 
+bool board::isSolved(){
+    for (int row=MinValue; row<=MaxValue; row++) {
+        for (int col=MinValue; col<=MaxValue; col++){
+            if (value[row][col] == Blank) {
+                cout << "Board is Not Solved" << endl;
+                return false;
+            }
+        }
+    }
+    cout << "Board is Solved" << endl;
+    return true;
+};
 
 
 vector<int> board::getConflicts(int i, int j) {
@@ -107,7 +120,7 @@ void board::removeConflict(int i, int j, int val) {
     // TODO Remove All with same row
     // TODO Remove All with same column
     // TODO Remove All with same 3x3 box
-    
+
 }
 board::board(int sqSize)
         : value(BoardSize+1,BoardSize+1),
@@ -148,10 +161,10 @@ void board::initialize(ifstream &fin)
                 setCell(i,j,ch-'0'); // Convert char to int
                 updateConflict(i,j,ch-'0');
             }
-            else {
-                // !TODO CHANGE THIS LATER NO MORE ELSE LEAVE EMPTY
-                setCell(i, j, 0);
-            }
+//            else {
+//                // !TODO CHANGE THIS LATER NO MORE ELSE LEAVE EMPTY
+//                setCell(i, j, 0);
+//            }
             // UPDATE CONFLICT VECTORS
         }
 }
@@ -206,7 +219,7 @@ void board::print()
             if (!isBlank(i,j))
                 cout << " " << getCell(i,j) << " ";
             else
-                cout << " ";
+                cout << "   ";
         }
         cout << "|";
         cout << endl;
