@@ -7,6 +7,7 @@
 #include <fstream>
 #include <vector>
 #include <algorithm>
+#include <cstdlib>
 
 using namespace std;
 typedef int ValueType; // The type of the value in a cell
@@ -42,7 +43,7 @@ public:
     void printConflictVector(int i, int j);
     bool isSolved();
     bool solveBoard();
-
+    int num;
 private:
 // The following matrices go from 1 to BoardSize in each
 // dimension, i.e., they are each (BoardSize+1) * (BoardSize+1)
@@ -90,6 +91,7 @@ void board::addConflict(int i, int j, int val) {
 //    if (find(conflictVectors[i][j].begin(), conflictVectors[i][j].end(), val) == conflictVectors[i][j].end()) {
 //        // If the value is not present, add it to the vector
     conflictVectors[i][j].push_back(val);
+    // cout << "ADDING CONFLICT TO (" << i << "," << j << "): " << val << endl;
 //    }
 }
 
@@ -129,11 +131,18 @@ void board::updateConflict(int i, int j, int val) {
 void board::subtractConflict(int i, int j, int val) {
     // Find the value in the conflict vector
     auto idx = find(conflictVectors[i][j].begin(), conflictVectors[i][j].end(), val);
-
     // If the value is found, erase it from the vector
-    if (idx != conflictVectors[i][j].end()) {
-        conflictVectors[i][j].erase(idx);
-    }
+    // if (i == 2 and j == 1) {
+    //     cout << "HERE ONCE (" << i <<  ", " << j << endl;
+    //     if (idx != conflictVectors[i][j].end()) {
+    //         cout << "subtracting " << val << endl;
+    //         conflictVectors[i][j].erase(idx);
+    //     }
+    // } else {
+        if (idx != conflictVectors[i][j].end()) {
+            conflictVectors[i][j].erase(idx);
+        }
+    // }
 }
 void board::removeConflict(int i, int j, int val) {
     // More complicated than simply removing vector if conflict vectors do not have duplicate entries for duplicat conflicts
@@ -145,6 +154,7 @@ void board::removeConflict(int i, int j, int val) {
     subtractConflict(i,j,val);
     for (int row = 1; row <= BoardSize; row++) {
         if (row != i) {
+            // cout << "In removeConflict (" << row <<  ", " << j << "): " << val<< endl;
             subtractConflict(row, j, val);
         }
     }
@@ -152,21 +162,24 @@ void board::removeConflict(int i, int j, int val) {
     // Update all in the same column, except cell (i, j)
     for (int col = 1; col <= BoardSize; col++) {
         if (col != j) {
+            // cout << "In removeConflict (" << i <<  ", " << col << "): " << val << endl;
             subtractConflict(i, col, val);
         }
-
+    }
         // TODO Remove All with same 3x3 box
 //    // Update all in the same 3x3 box, except cell (i, j)
-        int boxRow = ((i - 1) / 3) * 3 + 1;
-        int boxCol = ((j - 1) / 3) * 3 + 1;
-        for (int k = 0; k < 3; k++) {
-            for (int l = 0; l < 3; l++) {
-                if ((boxRow + k) == i || (boxCol + l) == j) {
-                    continue;
-                }
-                subtractConflict(boxRow + k, boxCol + l, val);
+    int boxRow = ((i - 1) / 3) * 3 + 1;
+    int boxCol = ((j - 1) / 3) * 3 + 1;
+    for (int k = 0; k < 3; k++) {
+        for (int l = 0; l < 3; l++) {
+            if ((boxRow + k) == i || (boxCol + l) == j) {
+                continue;
             }
+            // cout << "In removeConflict (" << boxRow+k <<  ", " << boxCol+l << "):"<< val << endl;
+
+            subtractConflict(boxRow + k, boxCol + l, val);
         }
+        
     }
 }
 
@@ -187,7 +200,7 @@ void board::clear()
             conflictVectors[i][j].clear();
             value[i][j] = Blank;
         }
-
+    recursiveCalls = 0;
 }
 
 void board::setCell(int i, int j, int val) {
@@ -280,8 +293,13 @@ void board::print()
 
 bool board::solveBoard() {
     int i, j;
-    recursiveCalls++; 
-    cout << "CALL: " << recursiveCalls << endl;
+    recursiveCalls++;
+    // print();
+    // printConflictVector(2,1);
+    // if (recursiveCalls > 138) {
+    //     exit(0);
+    // }
+    // cout << "CALL: " << recursiveCalls << "   Num" << num << endl;
     // Find an empty cell
     bool foundEmpty = false;
     for (i = 1; i <= BoardSize && !foundEmpty; i++) {
@@ -321,7 +339,7 @@ int main()
     cout << "IN MAIN" << endl;
     ifstream fin;
 //// Read the sample grid from the file.
-    string fileName = "smallSudoku.txt";
+    string fileName = "sudoku.txt";
 
     fin.open(fileName.c_str());
     if (!fin)
@@ -336,11 +354,13 @@ int main()
         while (fin && fin.peek() != 'Z')
         {
             b1.initialize(fin);
+            b1.num = count;
             cout << "SOLVING BOARD " << count << endl;
             b1.solveBoard();
             b1.print();
-            b1.printConflicts();
+            // b1.printConflicts();
             b1.isSolved();
+            count++;
         }
     }
     catch (indexRangeError &ex)
