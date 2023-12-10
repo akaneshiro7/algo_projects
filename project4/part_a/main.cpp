@@ -86,7 +86,7 @@ void board::addConflict(int i, int j, int val) {
 //    //Todo ADD CHECKING TO MAKE SURE CONFLICT VECTORS DO NOT CONTAIN DUPLICATE VALUES
 //    if (find(conflictVectors[i][j].begin(), conflictVectors[i][j].end(), val) == conflictVectors[i][j].end()) {
 //        // If the value is not present, add it to the vector
-        conflictVectors[i][j].push_back(val);
+    conflictVectors[i][j].push_back(val);
 //    }
 }
 
@@ -115,7 +115,7 @@ void board::updateConflict(int i, int j, int val) {
     for (int k = 0; k < 3; k++) {
         for (int l = 0; l < 3; l++) {
             if ((boxRow + k) == i || (boxCol + l) == j) {
-               continue;
+                continue;
             }
             addConflict(boxRow + k, boxCol + l, val);
         }
